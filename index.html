@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Currency Converter</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+<h2>Currency Converter</h2>
+
+<input type="number" id="amount" placeholder="Enter amount">
+
+<select id="from">
+  <option value="USD">USD</option>
+  <option value="EUR">EUR</option>
+  <option value="GBP">GBP</option>
+<option value="JPY">JPY</option>
+<option value="UGX">UGX</option>
+</select>
+
+<select id="to">
+  <option value="EUR">EUR</option>
+  <option value="USD">USD</option>
+  <option value="GBP">GBP</option>
+<option value="JPY">JPY</option>
+<option value="UGX">UGX</option>
+</select>
+
+<button onclick="convert()">Convert</button>
+<button onclick="reset"()">reset</button>
+
+<h3 id="result"></h3>
+
+<script>
+async function convert() {
+  let amount = document.getElementById("amount").value;
+  let from = document.getElementById("from").value;
+  let to = document.getElementById("to").value;
+
+  let response = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+  let data = await response.json();
+
+  let rate = data.rates[to];
+  let result = amount * rate;
+
+  document.getElementById("result").innerText = result.toFixed(2) + " " + to;
+}
+</script>
+
+<body>this app changes currencies</body>
+</html>
